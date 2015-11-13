@@ -34,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_ID_ANSWER = "answerid";
     private static final String KEY_QUESTION_ID = "idquestion";
     private static final String KEY_ANSWER = "answer";
+    private static final String KEY_VALID_ANSWER = "validanswer";
     // private static final String KEY_IMAGEPATH = "image_path";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_CATEGORY +" TEXT" + ")";
         String CREATE_ANSWERS_TABLE = "CREATE TABLE " + TABLE_ANSWERS + "("
                 + KEY_ID_ANSWER  + " INTEGER PRIMARY KEY,"+ KEY_QUESTION_ID + " INTEGER,"
-                + KEY_ANSWER +" TEXT" + ")";
+                + KEY_ANSWER +" TEXT" + KEY_VALID_ANSWER +"INTEGER" + ")";
         db.execSQL(CREATE_QUESTIONS_TABLE);
         db.execSQL(CREATE_ANSWERS_TABLE);
     }
@@ -87,6 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_ID_ANSWER, answer.getAnswerId());
         values.put(KEY_ID_QUESTION, answer.getQuestionId()); // Contact Name
         values.put(KEY_ANSWER, answer.getText()); // Contact Phone
+        values.put(KEY_VALID_ANSWER, answer.getIsValidAnswer()); // Contact Phone
         // values.put(KEY_IMAGEPATH,user.getImageUrl());
         // Inserting Row
         db.insert(TABLE_ANSWERS, null, values);
@@ -114,12 +116,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_ANSWERS, new String[]{KEY_ID_ANSWER,
-                        KEY_ANSWER, KEY_QUESTION_ID}, KEY_ID_ANSWER + "=?",
+                        KEY_ANSWER, KEY_QUESTION_ID , KEY_VALID_ANSWER}, KEY_ID_ANSWER + "=?",
                 new String[]{(String.valueOf(answerId))}, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        Answer answer = new Answer((cursor.getInt(0)),cursor.getInt(1), (cursor.getString(2)));
+        Answer answer = new Answer((cursor.getInt(0)),cursor.getInt(1), (cursor.getString(2)),cursor.getInt(3));
         // return contact
         return answer;
     }
@@ -164,6 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 answer.setAnswerId(cursor.getInt(0));
                 answer.setQuestionId(cursor.getInt(1));
                 answer.setText((cursor.getString(2)));
+                answer.setIsValidAnswer(cursor.getInt(3));
                 // Adding contact to list
                 answers.add(answer);
             } while (cursor.moveToNext());
@@ -173,5 +176,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return answers;
     }
     // Updating single contact
+    public List<Answer> getPossibleAnswersForQuestion(Question question) {
+        List<Answer> answers = new ArrayList<Answer>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ANSWERS + "WHERE" + KEY_QUESTION_ID + "="+ String.valueOf(question.getQuestionId());
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Answer answer = new Answer();
+                answer.setAnswerId(cursor.getInt(0));
+                answer.setQuestionId(cursor.getInt(1));
+                answer.setText((cursor.getString(2)));
+                answer.setIsValidAnswer(cursor.getInt(3));
+                // Adding contact to list
+                answers.add(answer);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return answers;
+    }
 }

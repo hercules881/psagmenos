@@ -9,10 +9,21 @@ public class Answer {
     private int questionId;
     private String text;
 
-    public Answer(int answerId, int questionId, String text) {
+    public int getIsValidAnswer() {
+        return isValidAnswer;
+    }
+
+    public void setIsValidAnswer(int isValidAnswer) {
+        this.isValidAnswer = isValidAnswer;
+    }
+
+    private int isValidAnswer;
+
+    public Answer(int answerId, int questionId, String text, int isValidAnswer) {
         this.answerId = answerId;
         this.questionId = questionId;
         this.text = text;
+        this.isValidAnswer = isValidAnswer;
     }
     public Answer() {
 
