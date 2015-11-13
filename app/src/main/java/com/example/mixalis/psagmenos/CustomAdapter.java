@@ -22,23 +22,11 @@ import java.io.IOException;
  * Created by mixalis on 13/11/2015.
  */
 class CustomAdapter extends ArrayAdapter<String> {
-    String send="";       //apothikeuei ola ta dedomena gia na ta steilei
-    String timer="";      //apothikeuei to byte pou theloume na alaxoume
-    String timitimer="";  // apothikeuei ti nea timi pou tha geinei to byte pou theloume na alaxoume
-    String timitimer2=""; // apothikeei tin timi tou timitimer wste na tin xanasteilei an einai 2 byte i timi p theloume na alaxoume
-    Integer position2=0;
-    String s2="";
-    Integer no2=0;
-
-
-
 
 
     private final Activity context;
     private  String[] itemname;
-    private String [] kol;
-    private String [] mike;
-    private String m_Text = "";
+
 
 
     public CustomAdapter(EnarxiActivity context, String[] itemname) {
@@ -50,10 +38,7 @@ class CustomAdapter extends ArrayAdapter<String> {
 
         this.context=context;
         this.itemname=itemname;
-        //this.kol=kol;
-        //this.mike=mike;
-        //this.sPort=sPort;
-        //this.imgid=imgid;
+
     }
 
 
@@ -65,7 +50,7 @@ class CustomAdapter extends ArrayAdapter<String> {
         final TextView text1 = (TextView) rowView.findViewById(R.id.text);
 
 
-        rowView.setClickable(true);  //test
+        rowView.setClickable(true);
         text1.setText(itemname[position]);
 
 
