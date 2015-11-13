@@ -29,7 +29,7 @@
 
 
     <TextView
-        android:id="@+id/title1"
+        android:id="@+id/enarxi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Έναρξη"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="Ρυθμίσεις"
         android:gravity="center_horizontal"
-        android:layout_below="@id/title1"
+        android:layout_below="@id/enarxi"
         android:layout_marginTop="20dp"
         android:textColor="#000000"
         android:textSize="24sp"
