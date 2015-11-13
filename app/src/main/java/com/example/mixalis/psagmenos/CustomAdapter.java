@@ -47,6 +47,7 @@ class CustomAdapter extends ArrayAdapter<String> {
 
 
 
+
         this.context=context;
         this.itemname=itemname;
         //this.kol=kol;
