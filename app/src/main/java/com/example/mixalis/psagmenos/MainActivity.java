@@ -1,23 +1,32 @@
 package com.example.mixalis.psagmenos;
 
-
+import android.app.ProgressDialog;
 import android.content.Intent;
-
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import Database.DatabaseConfig;
+import Database.DatabaseHelper;
 
 import static android.media.MediaPlayer.*;
 import static com.example.mixalis.psagmenos.R.*;
 
 public class MainActivity extends AppCompatActivity {
-    private Button enarxi;
+    private TextView enarxi;
     MediaPlayer mediaPlayer;
+    ProgressBar progressBarq;
+
+
 
 
 
@@ -32,12 +41,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
-      mediaPlayer = create(this, raw.back1);
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.show();
+        mediaPlayer = create(this, raw.back1);
         mediaPlayer.start();
 
+        final DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-// remember x >
-        enarxi = (Button) findViewById(id.enarxi);
+                DatabaseConfig.createDatabase(databaseHelper, new DatabaseConfig.DatabaseCreationListener() {
+                    @Override
+                    public void onDatabaseCreated() {
+                        MainActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();                            }
+                        });
+                    }
+                });
+
+            }
+        }).start();
+
+
+        enarxi = (TextView) findViewById(id.enarxi);
         enarxi.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
@@ -85,8 +115,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }
