@@ -18,6 +18,7 @@ import static android.media.MediaPlayer.create;
  */
 public class EnarxiActivity extends Activity {
     ListView listView;
+
     String[] katigories = new String[]{
             "Γεωγραφία",
             "Ιστορία",
