@@ -211,6 +211,32 @@ public class ExternalDbOpenHelper extends DatabaseHelper {
         // return contact list
         return answers;
     }
+
+    public List<Question> getQuestionForCategory(String category) {
+        List<Question> questions = new ArrayList<Question>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_QUESTIONS + " WHERE " + KEY_CATEGORY + " = "+"'"+category+"'";
+
+        SQLiteDatabase db = database;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Question question = new Question();
+                question.setQuestionId(cursor.getInt(0));
+                question.setText(cursor.getString(1));
+                question.setCategory((cursor.getString(2)));
+                // Adding contact to list
+                questions.add(question);
+            } while (cursor.moveToNext());
+        }
+
+
+        // return contact list
+        return questions;
+    }
+
     @Override
     public synchronized void close() {
         if (database != null) {
