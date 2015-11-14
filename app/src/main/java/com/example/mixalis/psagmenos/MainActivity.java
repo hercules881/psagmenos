@@ -1,6 +1,5 @@
 package com.example.mixalis.psagmenos;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +7,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import Database.DatabaseConfig;
-import Database.DatabaseHelper;
+import java.sql.SQLException;
+
+import Database.ExternalDbOpenHelper;
 
 import static android.media.MediaPlayer.*;
 import static com.example.mixalis.psagmenos.R.*;
@@ -41,31 +38,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
-        final ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.show();
+
         mediaPlayer = create(this, raw.back1);
         mediaPlayer.start();
 
-        final DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                DatabaseConfig.createDatabase(databaseHelper, new DatabaseConfig.DatabaseCreationListener() {
-                    @Override
-                    public void onDatabaseCreated() {
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();                            }
-                        });
-                    }
-                });
-
-            }
-        }).start();
-
+        ExternalDbOpenHelper dbHelper = new ExternalDbOpenHelper(this);
+        try {
+            dbHelper.openDataBase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         enarxi = (TextView) findViewById(id.enarxi);
         enarxi.setOnClickListener(new Button.OnClickListener() {
@@ -77,14 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
     }
-
-
-
-
-
-
 
 
     @Override

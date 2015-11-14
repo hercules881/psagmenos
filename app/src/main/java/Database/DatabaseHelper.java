@@ -23,18 +23,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "psagmenos";
 
     // Contacts table name
-    private static final String TABLE_QUESTIONS = "QUESTIONS";
-    private static final String TABLE_ANSWERS = "ANSWERS";
+    public static final String TABLE_QUESTIONS = "QUESTIONS";
+    public static final String TABLE_ANSWERS = "ANSWERS";
 
     // Contacts Table Columns names
-    private static final String KEY_ID_QUESTION  = "questionid";
-    private static final String KEY_QUESTION  = "question";
-    private static final String KEY_CATEGORY = "category";
+    public static final String KEY_ID_QUESTION  = "questionid";
+    public static final String KEY_QUESTION  = "question";
+    public static final String KEY_CATEGORY = "category";
 
-    private static final String KEY_ID_ANSWER = "answerid";
-    private static final String KEY_QUESTION_ID = "idquestion";
-    private static final String KEY_ANSWER = "answer";
-    private static final String KEY_VALID_ANSWER = "validanswer";
+    public static final String KEY_ID_ANSWER = "answerid";
+    public static final String KEY_QUESTION_ID = "idquestion";
+    public static final String KEY_ANSWER = "answer";
+    public static final String KEY_VALID_ANSWER = "validanswer";
     // private static final String KEY_IMAGEPATH = "image_path";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -98,107 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // Getting single contact
-    public Question getQuestion(int questionId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_QUESTIONS, new String[]{KEY_ID_QUESTION,
-                        KEY_QUESTION, KEY_CATEGORY}, KEY_ID_QUESTION + "=?",
-                new String[]{(String.valueOf(questionId))}, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        Question question = new Question((cursor.getInt(0)),cursor.getString(1), (cursor.getString(2)));
-        // return contact
-        return question;
-    }
-
-    public Answer getAnswer(int answerId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_ANSWERS, new String[]{KEY_ID_ANSWER,
-                        KEY_QUESTION_ID, KEY_ANSWER, KEY_VALID_ANSWER}, KEY_ID_ANSWER + "=?",
-                new String[]{(String.valueOf(answerId))}, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        Answer answer = new Answer((cursor.getInt(0)),cursor.getInt(1), (cursor.getString(2)),cursor.getInt(3));
-        // return contact
-
-        return answer;
-    }
-
-    // Getting All Contacts
-    public List<Question> getAllQuestions() {
-        List<Question> questions = new ArrayList<Question>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_QUESTIONS;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Question question = new Question();
-                question.setQuestionId(cursor.getInt(0));
-                question.setText(cursor.getString(1));
-                question.setCategory((cursor.getString(2)));
-                // Adding contact to list
-                questions.add(question);
-            } while (cursor.moveToNext());
-        }
-
-        // return contact list
-        return questions;
-    }
-
-    public List<Answer> getAllAnswers() {
-        List<Answer> answers = new ArrayList<Answer>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ANSWERS;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Answer answer = new Answer();
-                answer.setAnswerId(cursor.getInt(0));
-                answer.setQuestionId(cursor.getInt(1));
-                answer.setText((cursor.getString(2)));
-                answer.setIsValidAnswer(cursor.getInt(3));
-                // Adding contact to list
-                answers.add(answer);
-            } while (cursor.moveToNext());
-        }
-        // return contact list
-        return answers;
-    }
-    // Updating single contact
-    public List<Answer> getPossibleAnswersForQuestion(Question question) {
-        List<Answer> answers = new ArrayList<Answer>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ANSWERS + "WHERE" + KEY_QUESTION_ID + "="+ String.valueOf(question.getQuestionId());
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Answer answer = new Answer();
-                answer.setAnswerId(cursor.getInt(0));
-                answer.setQuestionId(cursor.getInt(1));
-                answer.setText((cursor.getString(2)));
-                answer.setIsValidAnswer(cursor.getInt(3));
-                // Adding contact to list
-                answers.add(answer);
-            } while (cursor.moveToNext());
-        }
 
 
-        // return contact list
-        return answers;
-    }
+
 }
