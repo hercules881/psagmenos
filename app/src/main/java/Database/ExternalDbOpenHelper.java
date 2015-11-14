@@ -189,7 +189,7 @@ public class ExternalDbOpenHelper extends DatabaseHelper {
     public List<Answer> getPossibleAnswersForQuestion(Question question) {
         List<Answer> answers = new ArrayList<Answer>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ANSWERS + "WHERE" + KEY_QUESTION_ID + "="+ String.valueOf(question.getQuestionId());
+        String selectQuery = "SELECT  * FROM " + TABLE_ANSWERS + " WHERE " + KEY_QUESTION_ID + " = "+ String.valueOf(question.getQuestionId());
 
         SQLiteDatabase db = database;
         Cursor cursor = db.rawQuery(selectQuery, null);
