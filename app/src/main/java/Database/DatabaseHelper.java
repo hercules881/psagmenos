@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "psagmenoss";
+    private static final String DATABASE_NAME = "psagmenos";
 
     // Contacts table name
     private static final String TABLE_QUESTIONS = "QUESTIONS";
@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_CATEGORY +" TEXT" + ")";
         String CREATE_ANSWERS_TABLE = "CREATE TABLE " + TABLE_ANSWERS + "("
                 + KEY_ID_ANSWER  + " INTEGER PRIMARY KEY,"+ KEY_QUESTION_ID + " INTEGER,"
-                + KEY_ANSWER +" TEXT" + KEY_VALID_ANSWER +"INTEGER" + ")";
+                + KEY_ANSWER +" TEXT," + KEY_VALID_ANSWER +" INTEGER" + ")";
         db.execSQL(CREATE_QUESTIONS_TABLE);
         db.execSQL(CREATE_ANSWERS_TABLE);
     }
@@ -116,13 +116,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_ANSWERS, new String[]{KEY_ID_ANSWER,
-                        KEY_ANSWER, KEY_QUESTION_ID , KEY_VALID_ANSWER}, KEY_ID_ANSWER + "=?",
+                        KEY_QUESTION_ID, KEY_ANSWER, KEY_VALID_ANSWER}, KEY_ID_ANSWER + "=?",
                 new String[]{(String.valueOf(answerId))}, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         Answer answer = new Answer((cursor.getInt(0)),cursor.getInt(1), (cursor.getString(2)),cursor.getInt(3));
         // return contact
+
         return answer;
     }
 
@@ -171,7 +172,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 answers.add(answer);
             } while (cursor.moveToNext());
         }
-
         // return contact list
         return answers;
     }
@@ -196,6 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 answers.add(answer);
             } while (cursor.moveToNext());
         }
+
 
         // return contact list
         return answers;
