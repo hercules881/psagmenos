@@ -14,13 +14,14 @@ import android.widget.TextView;
 import java.sql.SQLException;
 
 import Database.ExternalDbOpenHelper;
+import Misc.Preferences;
 
 import static android.media.MediaPlayer.*;
 import static com.example.mixalis.psagmenos.R.*;
 
 public class MainActivity extends AppCompatActivity {
     private TextView enarxi;
-    MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
     ProgressBar progressBarq;
 
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(layout.activity_main);
 
         mediaPlayer = create(this, raw.back1);
+        boolean isSoundEnabled = (boolean) Preferences.get(this, RythmiseisActivity.SOUNDSETTINGS, RythmiseisActivity.ISSOUNDENABLED, true);
+        if(isSoundEnabled)
         mediaPlayer.start();
 
         ExternalDbOpenHelper dbHelper = new ExternalDbOpenHelper(this);
@@ -63,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        findViewById(R.id.title2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MainActivity.this, RythmiseisActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
         });
     }
 
