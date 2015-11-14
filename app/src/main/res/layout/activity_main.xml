@@ -8,12 +8,13 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="310dp"
-        android:layout_height="80dp"
-        android:src="@drawable/boy"
+        android:layout_height="130dp"
+        android:src="@drawable/boy3"
         android:layout_marginTop="50dp"
         android:gravity="center_horizontal"
         android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
+        android:padding="-8dp"
         />
 
 
@@ -28,7 +29,7 @@
         android:textStyle="bold" />
 
 
-    <TextView
+    <Button
         android:id="@+id/enarxi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,14 +38,16 @@
         android:layout_below="@id/image"
         android:layout_marginTop="55dp"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         android:clickable="true"
         android:soundEffectsEnabled="true"
+        android:background="@drawable/my_buttoncorner"
+
         />
 
 
-    <TextView
+    <Button
         android:id="@+id/title2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,10 +56,12 @@
         android:layout_below="@id/enarxi"
         android:layout_marginTop="20dp"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         android:clickable="true"
         android:soundEffectsEnabled="true"
+        android:background="@drawable/my_buttoncorner"
+
         />
 
     <View
@@ -65,5 +70,9 @@
         android:layout_below="@+id/title2"
         android:layout_height="1dip"
         android:background="#151243" />
+
+
+
+
 
 </RelativeLayout>

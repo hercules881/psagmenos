@@ -2,6 +2,7 @@ package com.example.mixalis.psagmenos;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,8 @@ public class EnarxiActivity extends Activity {
         CustomAdapter adapter = new CustomAdapter(this, katigories);
         listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
+
+
     }
 
 }

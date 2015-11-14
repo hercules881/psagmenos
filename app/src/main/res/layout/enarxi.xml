@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
 
+
     <TextView
         android:id="@+id/title4"
         android:layout_width="match_parent"
@@ -16,6 +17,19 @@
         android:layout_marginTop="40dp"
 
         />
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="310dp"
+        android:layout_height="130dp"
+        android:src="@drawable/boy2"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/title"
+        android:layout_centerHorizontal="true"
+        android:padding="-8dp"
+        />
+
+
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,8 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
         android:layout_below="@id/title4"
         android:layout_marginTop="1dp"
         android:gravity="center"
@@ -41,7 +53,10 @@
         android:gravity="center"
         android:layout_below="@id/title4"
         android:layout_marginTop="40dp"
+
         />
+
+
     </LinearLayout>
 
 
