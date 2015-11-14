@@ -4,37 +4,26 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
-        android:id="@+id/title4"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Διάλεξε μία κατηγορία.."
+        android:text="Επέλεξες.."
         android:gravity="center_horizontal"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-
+        android:layout_marginTop="20dp"
         />
-    <ImageView
-        android:id="@+id/image"
+    <View
+        android:id="@+id/separator"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:src="@drawable/boy2"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-
-        android:layout_below="@id/title"
-        android:layout_centerHorizontal="true"
-        android:padding="-8dp"
-        />
-
-
-
+        android:layout_below="@+id/title2"
+        android:layout_height="1dip"
+        android:background="#151243" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/linear4"
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -44,22 +33,21 @@
 
         >
 
-
-    <ListView
-        android:id="@+id/list"
-        android:layout_height="340dp"
-        android:layout_width="230dp"
-        android:divider="#4449"
-        android:dividerHeight="1px"
-        android:gravity="center"
-        android:layout_below="@id/title4"
-        android:layout_marginTop="40dp"
-
-        />
-
+        <ProgressBar
+            android:id="@+id/progressbar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:minHeight="50dp"
+            android:minWidth="200dp"
+            android:progress="1" />
 
     </LinearLayout>
-
 
 
 

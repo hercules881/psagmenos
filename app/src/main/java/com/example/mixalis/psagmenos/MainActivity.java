@@ -56,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent myIntent = new Intent(MainActivity.this, EnarxiActivity.class);
                 MainActivity.this.startActivity(myIntent);
+
+
+
+
+
             }
 
         });
