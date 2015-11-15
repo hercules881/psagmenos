@@ -22,6 +22,7 @@ import java.util.TimerTask;
 import Database.Answer;
 import Database.ExternalDbOpenHelper;
 import Database.Question;
+import Misc.Preferences;
 
 /**
  * Created by mixalis on 14/11/2015.
@@ -47,6 +48,10 @@ public class GameActivity extends Activity {
     TextView erwtisi;
     TextView scoreview;
     int questionsCounter = 1;
+    int highScore;
+    public final static String GAMEACTIVITY = "gameactivity";
+    public final static String HIGHSCORE = "highscore";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +73,10 @@ public class GameActivity extends Activity {
         String lName = intent.getStringExtra("lastName");
         epelexes=fName;
 
+        highScore = (int) Preferences.get(this, GAMEACTIVITY, HIGHSCORE, 0);
 
 
-         dbHelper = new ExternalDbOpenHelper(this);
+        dbHelper = new ExternalDbOpenHelper(this);
         questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
         //pairnoume tuxaio arithmo gia erwtisi!
         randomNumer = getRandomNumer(questions.size()-1);
@@ -110,7 +116,10 @@ public class GameActivity extends Activity {
                                 questionsCounter++;
 
                                 if(questionsCounter == 10) {
-                                    showAlertDialog2();
+                                       if(scoreteliko>highScore)
+                                        showAlertDialog2();
+                                    else
+                                        showAlertDialog();
                                     return;
                                 }
 
@@ -178,7 +187,10 @@ public class GameActivity extends Activity {
                     lifes--;
                 }
                 if(lifes == 0){
-                    showAlertDialog();
+                   if(scoreteliko>highScore)
+                    showAlertDialog2();
+                    else
+                   showAlertDialog();
                     return;
                 }
 
@@ -213,7 +225,10 @@ public class GameActivity extends Activity {
                     lifes--;
                 }
                 if(lifes == 0){
-                    showAlertDialog();
+                    if(scoreteliko>highScore)
+                        showAlertDialog2();
+                    else
+                        showAlertDialog();
                     return;
                 }
 
@@ -246,7 +261,10 @@ public class GameActivity extends Activity {
                     lifes--;
                 }
                 if(lifes == 0){
-                    showAlertDialog();
+                    if(scoreteliko>highScore)
+                        showAlertDialog2();
+                    else
+                        showAlertDialog();
                     return;
                 }
 
@@ -279,7 +297,10 @@ public class GameActivity extends Activity {
                     lifes--;
                 }
                 if(lifes == 0){
-                    showAlertDialog();
+                    if(scoreteliko>highScore)
+                        showAlertDialog2();
+                    else
+                        showAlertDialog();
                     return;
                 }
 
@@ -318,7 +339,7 @@ public class GameActivity extends Activity {
         dialog.setContentView(R.layout.dilaoggelio);
         dialog.setTitle("High score");
         TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Your score:");
+        text.setText("Your score:"+scoreteliko);
         dialog.findViewById(R.id.dialogButtonOK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -326,7 +347,7 @@ public class GameActivity extends Activity {
 
             }
         });
-
+        Preferences.set(this, GAMEACTIVITY, HIGHSCORE, scoreteliko);
 
 
         dialog.setCancelable(false);
@@ -357,7 +378,10 @@ public class GameActivity extends Activity {
     private void goToNextQuestion(){
         questionsCounter++;
         if(questionsCounter == 10) {
-            showAlertDialog2();
+            if(scoreteliko>highScore)
+                showAlertDialog2();
+            else
+                showAlertDialog();
             return;
         }
         apantisi1.setEnabled(false);
