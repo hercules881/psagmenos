@@ -382,15 +382,17 @@ public class GameActivity extends Activity {
         }
 
     public int getRandomWithExclusion(Random rnd, int start, int end, ArrayList<Integer> exclude) {
-        int random = start + rnd.nextInt(end - start + 1 - exclude.size());
-        for (int ex : exclude) {
-            if (random < ex) {
-                break;
-            }
-            random++;
+        Random rand = new Random();
+        int range = end - start + 1;
+
+        int random = rand.nextInt(range) + 1;
+        while(exclude.contains(random)) {
+            random = rand.nextInt(range) + 1;
         }
+
         return random;
     }
+
 
     private void goToNextQuestion(){
         questionsCounter++;
