@@ -2,6 +2,7 @@ package com.example.mixalis.psagmenos;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -262,17 +263,24 @@ title.setText(epelexes);
     }
 
     private void showAlertDialog() {
-        AlertDialog.Builder b = new AlertDialog.Builder(GameActivity.this);
-        b.setTitle("ΧΑΣΑΤΕ!");
-        b.setMessage("Λυπάμαι, τον ήπιες!");
-        b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialogcry);
+        dialog.setTitle("Λυπάμαι χάσατε..");
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        text.setText("Your score:");
+        dialog.findViewById(R.id.dialogButtonOK).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View v) {
                 GameActivity.this.finish();
+
             }
         });
-        b.setCancelable(false);
-        b.create().show();
+
+
+
+        dialog.setCancelable(false);
+        dialog.show();
     }
 
 
