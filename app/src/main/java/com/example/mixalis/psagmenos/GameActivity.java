@@ -54,6 +54,8 @@ public class GameActivity extends Activity {
         erwtisi.setText(questions.get(0).getText());
 
 
+
+
       ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(0));//apantiseis
         answers.get(0);
         apantisi1.setText(answers.get(0).getText());
