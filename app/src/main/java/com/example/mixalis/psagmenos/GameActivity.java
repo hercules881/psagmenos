@@ -116,6 +116,7 @@ public class GameActivity extends Activity {
                                 questionsCounter++;
 
                                 if(questionsCounter == 10) {
+                                    progressStatus=0;
                                        if(scoreteliko>highScore)
                                         showAlertDialog2();
                                     else
@@ -380,6 +381,7 @@ public class GameActivity extends Activity {
     private void goToNextQuestion(){
         questionsCounter++;
         if(questionsCounter == 10) {
+            progressStatus=0;
             if(scoreteliko>highScore)
                 showAlertDialog2();
             else
