@@ -51,6 +51,8 @@ public class GameActivity extends Activity {
     int highScore;
     public final static String GAMEACTIVITY = "gameactivity";
     public final static String HIGHSCORE = "highscore";
+    TextView highScoreText;
+    boolean lockLoop = false;
 
 
     @Override
@@ -60,7 +62,7 @@ public class GameActivity extends Activity {
         progressBar = (ProgressBar) findViewById(R.id.progressbar1);
         erwtisi = (TextView) findViewById(R.id.erwtisi);
         scoreview = (TextView) findViewById(R.id.score);
-
+        highScoreText = (TextView) findViewById(R.id.highscore);
 
         apantisi1 = (Button) findViewById(R.id.apantisi1);
         apantisi2 = (Button) findViewById(R.id.apantisi2);
@@ -74,7 +76,7 @@ public class GameActivity extends Activity {
         epelexes=fName;
 
         highScore = (int) Preferences.get(this, GAMEACTIVITY, HIGHSCORE, 0);
-
+        highScoreText.setText(String.valueOf(highScore));
 
         dbHelper = new ExternalDbOpenHelper(this);
         questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
@@ -102,6 +104,8 @@ public class GameActivity extends Activity {
             public void run() {
 
                 while (progressStatus > 0) {
+                    if(lockLoop)
+                        continue;
                     progressStatus -= 1;
                     score=progressStatus; //gia vathmologia
 
@@ -171,6 +175,8 @@ public class GameActivity extends Activity {
         apantisi1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                lockLoop = true;
+
                 boolean isCorrectAnswer = false;
                 Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer> answers = (ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
@@ -206,6 +212,9 @@ public class GameActivity extends Activity {
         apantisi2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                lockLoop = true;
+
+
                 boolean isCorrectAnswer = false;
                 Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
@@ -243,6 +252,9 @@ public class GameActivity extends Activity {
         apantisi3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                lockLoop = true;
+
+
                 boolean isCorrectAnswer = false;
                 Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
@@ -279,6 +291,8 @@ public class GameActivity extends Activity {
         apantisi4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                lockLoop = true;
+
                 boolean isCorrectAnswer = false;
                 Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
@@ -420,6 +434,7 @@ public class GameActivity extends Activity {
                         apantisi3.setEnabled(true);
                         apantisi4.setEnabled(true);
                         progressStatus = 81;
+                        lockLoop = false;
 
                     }
                 });
