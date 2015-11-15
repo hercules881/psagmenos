@@ -121,7 +121,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_below="@id/erwtisi"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         >
 
@@ -210,12 +210,12 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linear4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_below="@id/linear2"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         >
 
@@ -226,7 +226,7 @@
     android:layout_width="65dp"
     android:layout_height="65dp"
     android:text="Score:"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:textColor="#000000"
     android:textSize="20sp"
     android:textStyle="bold"
@@ -238,7 +238,7 @@
         android:layout_width="45dp"
         android:layout_height="65dp"
         android:text="0"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -246,5 +246,48 @@
         />
     </LinearLayout>
 
+
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear5"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@id/linear4"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        >
+
+
+
+        <TextView
+            android:id="@+id/giahighscore"
+            android:layout_width="120dp"
+            android:layout_height="65dp"
+            android:text="High score:"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="0dp"
+            />
+
+        <TextView
+            android:id="@+id/highscore"
+            android:layout_width="40dp"
+            android:layout_height="65dp"
+            android:text="0"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="0dp"
+            />
+    </LinearLayout>
 
 </LinearLayout>
