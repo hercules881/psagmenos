@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Database.Answer;
 import Database.ExternalDbOpenHelper;
@@ -36,13 +38,17 @@ public class GameActivity extends Activity {
     private int lifes = 3;
     ArrayList<Integer> lastQuestionNumber = new ArrayList<>();
     int randomNumer;
+    Thread thread;
+     ArrayList<Question> questions;
+    ExternalDbOpenHelper dbHelper;
+    TextView erwtisi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         progressBar = (ProgressBar) findViewById(R.id.progressbar1);
-        final TextView erwtisi = (TextView) findViewById(R.id.erwtisi);
+        erwtisi = (TextView) findViewById(R.id.erwtisi);
 
         apantisi1 = (Button) findViewById(R.id.apantisi1);
         apantisi2 = (Button) findViewById(R.id.apantisi2);
@@ -57,8 +63,8 @@ public class GameActivity extends Activity {
 
 
 
-        final ExternalDbOpenHelper dbHelper = new ExternalDbOpenHelper(this);
-        final ArrayList<Question> questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
+         dbHelper = new ExternalDbOpenHelper(this);
+        questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
         //pairnoume tuxaio arithmo gia erwtisi!
         randomNumer = getRandomNumer(questions.size());
         //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
@@ -79,7 +85,7 @@ public class GameActivity extends Activity {
 
         TextView title = (TextView) findViewById(R.id.title);
 title.setText(epelexes);
-        new Thread(new Runnable() {
+     thread =  new Thread(new Runnable() {
             public void run() {
 
                 while (progressStatus > 0) {
@@ -107,16 +113,7 @@ title.setText(epelexes);
                                 findViewById(lifes ==3?R.id.zwi3:lifes == 2? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
                                 lifes--;
                                 if(lifes == 0){
-                                    AlertDialog.Builder b = new AlertDialog.Builder(GameActivity.this);
-                                    b.setTitle("ΧΑΣΑΤΕ!");
-                                    b.setMessage("Λυπάμαι, τον ήπιες!");
-                                    b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            GameActivity.this.finish();
-                                        }
-                                    });
-                                    b.create().show();
+                                    showAlertDialog();
 
                                 }
                             }
@@ -137,11 +134,149 @@ title.setText(epelexes);
                     }
                 }
             }
-        }).start();
+        });
+        thread.start();
+
+        apantisi1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isCorrectAnswer = false;
+                Question question = (questions.get(randomNumer));
+                ArrayList<Answer> answers = (ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
+                for (Answer answer : answers) {
+                    if (answer.getIsValidAnswer() == 1 && (apantisi1.getText().toString().equals(answer.getText()))) {
+                        apantisi1.setBackgroundResource(R.drawable.text_cornerprassino);   //setBackgroundColor(GameActivity.this.getResources().getColor(R.color.rigth_answer_green));
+                       isCorrectAnswer = true;
+                        break;
+                    } else {
+                        apantisi1.setBackgroundResource(R.drawable.text_cornerkokkino);   //setBackgroundColor(GameActivity.this.getResources().getColor(R.color.rigth_answer_green));
+
+
+                    }
+
+                }
+                if(!isCorrectAnswer) {
+                    findViewById(lifes == 3 ? R.id.zwi3 : lifes == 2 ? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
+                    lifes--;
+                }
+                if(lifes == 0){
+                    showAlertDialog();
+                    return;
+                }
+                goToNextQuestion();
+
+            }
+        });
+
+        apantisi2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isCorrectAnswer = false;
+                Question question = (questions.get(randomNumer));
+                ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
+                for (Answer answer :answers){
+                    if(answer.getIsValidAnswer()==1 && (apantisi2.getText().toString().equals(answer.getText()))){
+                        apantisi2.setBackgroundResource(R.drawable.text_cornerprassino);
+                        isCorrectAnswer = true;
+                        break;
+                    }
+                    else {
+                        apantisi2.setBackgroundResource(R.drawable.text_cornerkokkino);
+
+                    }
+
+                }
+
+                if(!isCorrectAnswer) {
+                    findViewById(lifes == 3 ? R.id.zwi3 : lifes == 2 ? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
+                    lifes--;
+                }
+                if(lifes == 0){
+                    showAlertDialog();
+                    return;
+                }
+                goToNextQuestion();
+            }
+        });
+
+        apantisi3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isCorrectAnswer = false;
+                Question question = (questions.get(randomNumer));
+                ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
+                for (Answer answer :answers){
+                    if(answer.getIsValidAnswer()==1 && (apantisi3.getText().toString().equals(answer.getText()))){
+                        apantisi3.setBackgroundResource(R.drawable.text_cornerprassino);
+                        isCorrectAnswer = true;
+                        break;
+                    }
+                    else {
+                        apantisi3.setBackgroundResource(R.drawable.text_cornerkokkino);
+
+
+                    }
+                }
+                if(!isCorrectAnswer) {
+                    findViewById(lifes == 3 ? R.id.zwi3 : lifes == 2 ? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
+                    lifes--;
+                }
+                if(lifes == 0){
+                    showAlertDialog();
+                    return;
+                }
+                goToNextQuestion();
+            }
+        });
+
+        apantisi4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isCorrectAnswer = false;
+                Question question = (questions.get(randomNumer));
+                ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
+                for (Answer answer :answers){
+                    if(answer.getIsValidAnswer()==1 && (apantisi4.getText().toString().equals(answer.getText()))){
+                        apantisi4.setBackgroundResource(R.drawable.text_cornerprassino);
+                        isCorrectAnswer = true;
+                        break;
+                    }
+                    else {
+                        apantisi4.setBackgroundResource(R.drawable.text_cornerkokkino);
+
+
+                    }
+                }
+                if(!isCorrectAnswer) {
+                    findViewById(lifes == 3 ? R.id.zwi3 : lifes == 2 ? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
+                    lifes--;
+                }
+                if(lifes == 0){
+                    showAlertDialog();
+                    return;
+                }
+                goToNextQuestion();
+            }
+        });
+
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder b = new AlertDialog.Builder(GameActivity.this);
+        b.setTitle("ΧΑΣΑΤΕ!");
+        b.setMessage("Λυπάμαι, τον ήπιες!");
+        b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                GameActivity.this.finish();
+            }
+        });
+        b.setCancelable(false);
+        b.create().show();
     }
 
 
-        private int getRandomNumer(int size){
+    private int getRandomNumer(int size){
             Random r = new Random();
           return   randomNumer = r.nextInt(size);
         }
@@ -156,7 +291,41 @@ title.setText(epelexes);
         }
         return random;
     }
+
+    private void goToNextQuestion(){
+        Timer timer = new Timer();
+                                    /* Duration of wait */
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                GameActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size() , lastQuestionNumber);
+
+                        //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
+                        lastQuestionNumber.add(randomNumer);
+                        erwtisi.setText(questions.get(randomNumer-1).getText());
+                        ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer-1));//apantiseis
+                        answers.get(0);
+                        apantisi1.setText(answers.get(0).getText());
+                        apantisi2.setText(answers.get(1).getText());
+                        apantisi3.setText(answers.get(2).getText());
+                        apantisi4.setText(answers.get(3).getText());
+                        apantisi1.setBackgroundResource(R.drawable.text_corner);
+                        apantisi2.setBackgroundResource(R.drawable.text_corner);
+                        apantisi3.setBackgroundResource(R.drawable.text_corner);
+                        apantisi4.setBackgroundResource(R.drawable.text_corner);
+                        progressStatus = 101;
+
+                    }
+                });
+
+            }
+        }, 1000);
     }
+
+}
 
 
 
