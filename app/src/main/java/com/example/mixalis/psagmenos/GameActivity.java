@@ -284,6 +284,31 @@ title.setText(epelexes);
     }
 
 
+    private void showAlertDialog2() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dilaoggelio);
+        dialog.setTitle("High score");
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        text.setText("Your score:");
+        dialog.findViewById(R.id.dialogButtonOK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GameActivity.this.finish();
+
+            }
+        });
+
+
+
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+
+
+
+
     private int getRandomNumer(int size){
             Random r = new Random();
           return   randomNumer = r.nextInt(size);
