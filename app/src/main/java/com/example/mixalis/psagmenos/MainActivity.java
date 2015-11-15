@@ -1,5 +1,6 @@
 package com.example.mixalis.psagmenos;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         });
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(layout.dialogcry);
+        dialog.setTitle("Λυπάμαι χάσατε..");
+        TextView text = (TextView) dialog.findViewById(R.id.text);
+        text.setText("Your score:");
+        dialog.show();
     }
 
 
