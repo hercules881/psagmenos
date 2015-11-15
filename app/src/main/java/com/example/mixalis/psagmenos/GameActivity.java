@@ -295,7 +295,7 @@ public class GameActivity extends Activity {
         dialog.setContentView(R.layout.dialogcry);
         dialog.setTitle("Λυπάμαι χάσατε..");
         TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Your score:");
+        text.setText("Your score:"+scoreteliko);
         dialog.findViewById(R.id.dialogButtonOK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
