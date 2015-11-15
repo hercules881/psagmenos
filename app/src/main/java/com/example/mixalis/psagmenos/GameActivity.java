@@ -48,13 +48,11 @@ public class GameActivity extends Activity {
         epelexes=fName;
 
 
+
         ExternalDbOpenHelper dbHelper = new ExternalDbOpenHelper(this);
   ArrayList<Question>questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
         questions.get(0);
         erwtisi.setText(questions.get(0).getText());
-
-
-
 
 
       ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(0));//apantiseis
