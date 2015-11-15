@@ -4,6 +4,10 @@
     android:layout_height="match_parent">
 
 
+
+
+
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -21,6 +25,51 @@
         android:layout_below="@+id/title2"
         android:layout_height="1dip"
         android:background="#151243" />
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        >
+
+    <ImageView
+        android:id="@+id/zwi1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/zwi2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:layout_below="@id/title"   />
+
+    <ImageView
+        android:id="@+id/zwi2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/zwi2"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_below="@id/title"   />
+
+    <ImageView
+        android:id="@+id/zwi3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/zwi2"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_below="@id/title"   />
+
+    </LinearLayout>
+
+
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linear"
@@ -40,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:indeterminate="false"
             android:max="100"
             android:minHeight="50dp"
@@ -49,6 +98,113 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/erwtisi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="erwtisi"
+        android:gravity="center_horizontal"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/progressbar1"
+        android:layout_marginTop="10dp"
+        />
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@id/erwtisi"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        >
+
+
+        <Button
+            android:id="@+id/apantisi1"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="50"
+            android:textAllCaps="false"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/my_buttoncorner"
+            android:soundEffectsEnabled="true"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+
+            />
+
+
+
+
+
+        <Button
+            android:id="@+id/apantisi2"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="50"
+            android:layout_marginLeft="10dp"
+            android:textAllCaps="false"
+            android:background="@drawable/my_buttoncorner"
+            android:soundEffectsEnabled="true"
+            android:textStyle="italic"
+
+            android:padding="7dp"
+            android:scaleType="fitCenter"/>
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@id/linear1"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        >
+
+
+        <Button
+            android:id="@+id/apantisi3"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="50"
+            android:textAllCaps="false"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/my_buttoncorner"
+            android:soundEffectsEnabled="true"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+
+            />
+
+
+
+
+
+        <Button
+            android:id="@+id/apantisi4"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="50"
+            android:layout_marginLeft="10dp"
+            android:textAllCaps="false"
+            android:background="@drawable/my_buttoncorner"
+            android:soundEffectsEnabled="true"
+            android:textStyle="italic"
+
+            android:padding="7dp"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
 
 
 
