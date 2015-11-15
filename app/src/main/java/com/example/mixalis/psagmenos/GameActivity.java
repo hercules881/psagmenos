@@ -66,14 +66,14 @@ public class GameActivity extends Activity {
          dbHelper = new ExternalDbOpenHelper(this);
         questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
         //pairnoume tuxaio arithmo gia erwtisi!
-        randomNumer = getRandomNumer(questions.size());
+        randomNumer = getRandomNumer(questions.size()-1);
         //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
         lastQuestionNumber.add(randomNumer);
-        questions.get(randomNumer-1);
-        erwtisi.setText(questions.get(randomNumer-1).getText());
+        questions.get(randomNumer);
+        erwtisi.setText(questions.get(randomNumer).getText());
 
 
-      ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer-1));//apantiseis
+      ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer));//apantiseis
         answers.get(0);
         apantisi1.setText(answers.get(0).getText());
         apantisi2.setText(answers.get(1).getText());
@@ -98,12 +98,12 @@ title.setText(epelexes);
                             progressBar.setProgress(progressStatus);
                             //an teleivse o xronos allakse erwtisi!!!
                             if(progressStatus == 0){
-                                randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size() , lastQuestionNumber);
+                                randomNumer = getRandomWithExclusion(new Random(), 0 , questions.size()-1 , lastQuestionNumber);
 
                                 //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
                                 lastQuestionNumber.add(randomNumer);
-                                erwtisi.setText(questions.get(randomNumer-1).getText());
-                                ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer-1));//apantiseis
+                                erwtisi.setText(questions.get(randomNumer).getText());
+                                ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer));//apantiseis
                                 answers.get(0);
                                 apantisi1.setText(answers.get(0).getText());
                                 apantisi2.setText(answers.get(1).getText());
