@@ -77,12 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(layout.dialogcry);
-        dialog.setTitle("Λυπάμαι χάσατε..");
-        TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Your score:");
-        dialog.show();
     }
 
 
