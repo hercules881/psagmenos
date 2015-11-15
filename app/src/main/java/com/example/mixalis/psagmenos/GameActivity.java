@@ -293,6 +293,10 @@ title.setText(epelexes);
     }
 
     private void goToNextQuestion(){
+        apantisi1.setEnabled(false);
+        apantisi2.setEnabled(false);
+        apantisi3.setEnabled(false);
+        apantisi4.setEnabled(false);
         Timer timer = new Timer();
                                     /* Duration of wait */
         timer.schedule(new TimerTask() {
@@ -316,6 +320,10 @@ title.setText(epelexes);
                         apantisi2.setBackgroundResource(R.drawable.text_corner);
                         apantisi3.setBackgroundResource(R.drawable.text_corner);
                         apantisi4.setBackgroundResource(R.drawable.text_corner);
+                        apantisi1.setEnabled(true);
+                        apantisi2.setEnabled(true);
+                        apantisi3.setEnabled(true);
+                        apantisi4.setEnabled(true);
                         progressStatus = 101;
 
                     }
