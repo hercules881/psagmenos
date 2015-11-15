@@ -123,6 +123,10 @@ title.setText(epelexes);
                            // textView.setText(progressStatus+"/"+progressBar.getMax());
                         }
                     });
+                    //an teleiwsoun oi zwes stamata tin loopa!!!
+                    if (lifes == 0)
+                        break;
+
                     try {
                         // Sleep for 200 milliseconds.
 
