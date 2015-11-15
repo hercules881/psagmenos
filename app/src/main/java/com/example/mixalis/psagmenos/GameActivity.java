@@ -43,6 +43,7 @@ public class GameActivity extends Activity {
      ArrayList<Question> questions;
     ExternalDbOpenHelper dbHelper;
     TextView erwtisi;
+    int questionsCounter = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +100,20 @@ public class GameActivity extends Activity {
                             progressBar.setProgress(progressStatus);
                             //an teleivse o xronos allakse erwtisi!!!
                             if(progressStatus == 0){
+                                questionsCounter++;
+
+                                if(questionsCounter == 10) {
+                                    showAlertDialog2();
+                                    return;
+                                }
+
+                                findViewById(lifes ==3?R.id.zwi3:lifes == 2? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
+                                lifes--;
+                                if(lifes == 0){
+                                    showAlertDialog();
+                                    return;
+
+                                }
                                 randomNumer = getRandomWithExclusion(new Random(), 0 , questions.size()-1 , lastQuestionNumber);
 
                                 //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
@@ -111,12 +126,7 @@ public class GameActivity extends Activity {
                                 apantisi3.setText(answers.get(2).getText());
                                 apantisi4.setText(answers.get(3).getText());
                                 progressStatus = 101;
-                                findViewById(lifes ==3?R.id.zwi3:lifes == 2? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
-                                lifes--;
-                                if(lifes == 0){
-                                    showAlertDialog();
 
-                                }
                             }
                            // textView.setText(progressStatus+"/"+progressBar.getMax());
                         }
@@ -326,6 +336,11 @@ public class GameActivity extends Activity {
     }
 
     private void goToNextQuestion(){
+        questionsCounter++;
+        if(questionsCounter == 10) {
+            showAlertDialog2();
+            return;
+        }
         apantisi1.setEnabled(false);
         apantisi2.setEnabled(false);
         apantisi3.setEnabled(false);
