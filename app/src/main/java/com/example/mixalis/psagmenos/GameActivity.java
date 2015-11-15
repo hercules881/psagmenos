@@ -47,7 +47,7 @@ public class GameActivity extends Activity {
     ExternalDbOpenHelper dbHelper;
     TextView erwtisi;
     TextView scoreview;
-    int questionsCounter = 1;
+    int questionsCounter = 0;
     int highScore;
     public final static String GAMEACTIVITY = "gameactivity";
     public final static String HIGHSCORE = "highscore";
