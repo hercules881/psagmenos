@@ -70,11 +70,11 @@ public class GameActivity extends Activity {
         randomNumer = getRandomNumer(questions.size()-1);
         //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
         lastQuestionNumber.add(randomNumer);
-        questions.get(randomNumer);
-        erwtisi.setText(questions.get(randomNumer).getText());
+        questions.get(randomNumer-1);
+        erwtisi.setText(questions.get(randomNumer-1).getText());
 
 
-      ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer));//apantiseis
+      ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer-1));//apantiseis
         answers.get(0);
         apantisi1.setText(answers.get(0).getText());
         apantisi2.setText(answers.get(1).getText());
@@ -85,8 +85,8 @@ public class GameActivity extends Activity {
 
 
         TextView title = (TextView) findViewById(R.id.title);
-title.setText(epelexes);
-     thread =  new Thread(new Runnable() {
+        title.setText(epelexes);
+        thread =  new Thread(new Runnable() {
             public void run() {
 
                 while (progressStatus > 0) {
@@ -142,7 +142,7 @@ title.setText(epelexes);
             @Override
             public void onClick(View view) {
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer));
+                Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer> answers = (ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer : answers) {
                     if (answer.getIsValidAnswer() == 1 && (apantisi1.getText().toString().equals(answer.getText()))) {
@@ -151,8 +151,6 @@ title.setText(epelexes);
                         break;
                     } else {
                         apantisi1.setBackgroundResource(R.drawable.text_cornerkokkino);   //setBackgroundColor(GameActivity.this.getResources().getColor(R.color.rigth_answer_green));
-
-
                     }
 
                 }
@@ -173,7 +171,7 @@ title.setText(epelexes);
             @Override
             public void onClick(View view) {
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer));
+                Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer :answers){
                     if(answer.getIsValidAnswer()==1 && (apantisi2.getText().toString().equals(answer.getText()))){
@@ -204,7 +202,7 @@ title.setText(epelexes);
             @Override
             public void onClick(View view) {
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer));
+                Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer :answers){
                     if(answer.getIsValidAnswer()==1 && (apantisi3.getText().toString().equals(answer.getText()))){
@@ -234,7 +232,7 @@ title.setText(epelexes);
             @Override
             public void onClick(View view) {
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer));
+                Question question = (questions.get(randomNumer-1));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer :answers){
                     if(answer.getIsValidAnswer()==1 && (apantisi4.getText().toString().equals(answer.getText()))){
@@ -280,6 +278,7 @@ title.setText(epelexes);
 
 
         dialog.setCancelable(false);
+        if(!GameActivity.this.isFinishing())
         dialog.show();
     }
 
@@ -302,7 +301,8 @@ title.setText(epelexes);
 
 
         dialog.setCancelable(false);
-        dialog.show();
+        if(!GameActivity.this.isFinishing())
+            dialog.show();
     }
 
 
@@ -338,7 +338,7 @@ title.setText(epelexes);
                 GameActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size()-1 , lastQuestionNumber);
+                        randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size() , lastQuestionNumber);
 
                         //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
                         lastQuestionNumber.add(randomNumer);
@@ -366,6 +366,11 @@ title.setText(epelexes);
         }, 1000);
     }
 
+    @Override
+    protected void onDestroy() {
+        thread.interrupt();
+        super.onDestroy();
+    }
 }
 
 
