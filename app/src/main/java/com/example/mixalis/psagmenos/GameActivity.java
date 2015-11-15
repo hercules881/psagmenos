@@ -126,7 +126,10 @@ public class GameActivity extends Activity {
                                 findViewById(lifes ==3?R.id.zwi3:lifes == 2? R.id.zwi2 : R.id.zwi1).setVisibility(View.INVISIBLE);
                                 lifes--;
                                 if(lifes == 0){
-                                    showAlertDialog();
+                                    if(scoreteliko>highScore)
+                                        showAlertDialog2();
+                                    else
+                                        showAlertDialog();
                                     return;
 
                                 }
@@ -339,7 +342,7 @@ public class GameActivity extends Activity {
         dialog.setContentView(R.layout.dilaoggelio);
         dialog.setTitle("High score");
         TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Your score:"+scoreteliko);
+        text.setText("Your score:" + scoreteliko);
         dialog.findViewById(R.id.dialogButtonOK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -348,7 +351,6 @@ public class GameActivity extends Activity {
             }
         });
         Preferences.set(this, GAMEACTIVITY, HIGHSCORE, scoreteliko);
-
 
         dialog.setCancelable(false);
         if(!GameActivity.this.isFinishing())
