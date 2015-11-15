@@ -27,7 +27,9 @@ import Database.Question;
  * Created by mixalis on 14/11/2015.
  */
 public class GameActivity extends Activity {
-    private int progressStatus = 101;
+    private int progressStatus = 81;
+    Integer score=0;      //apothikeuei tin progressstatus
+    Integer scoreteliko=0; //tha tin prosthetei sto proigoumeno score
     private Handler handler = new Handler();
     private ProgressBar progressBar;
     ProgressBar bar;
@@ -43,6 +45,7 @@ public class GameActivity extends Activity {
      ArrayList<Question> questions;
     ExternalDbOpenHelper dbHelper;
     TextView erwtisi;
+    TextView scoreview;
     int questionsCounter = 1;
 
     @Override
@@ -51,6 +54,8 @@ public class GameActivity extends Activity {
         setContentView(R.layout.game);
         progressBar = (ProgressBar) findViewById(R.id.progressbar1);
         erwtisi = (TextView) findViewById(R.id.erwtisi);
+        scoreview = (TextView) findViewById(R.id.score);
+
 
         apantisi1 = (Button) findViewById(R.id.apantisi1);
         apantisi2 = (Button) findViewById(R.id.apantisi2);
@@ -92,6 +97,8 @@ public class GameActivity extends Activity {
 
                 while (progressStatus > 0) {
                     progressStatus -= 1;
+                    score=progressStatus; //gia vathmologia
+
                     // Update the progress bar and display the
                     //current value in the text view
 
@@ -125,7 +132,7 @@ public class GameActivity extends Activity {
                                 apantisi2.setText(answers.get(1).getText());
                                 apantisi3.setText(answers.get(2).getText());
                                 apantisi4.setText(answers.get(3).getText());
-                                progressStatus = 101;
+                                progressStatus = 81;
 
                             }
                            // textView.setText(progressStatus+"/"+progressBar.getMax());
@@ -158,6 +165,8 @@ public class GameActivity extends Activity {
                     if (answer.getIsValidAnswer() == 1 && (apantisi1.getText().toString().equals(answer.getText()))) {
                         apantisi1.setBackgroundResource(R.drawable.text_cornerprassino);   //setBackgroundColor(GameActivity.this.getResources().getColor(R.color.rigth_answer_green));
                        isCorrectAnswer = true;
+                        scoreteliko=scoreteliko+score;
+                        scoreview.setText(String.valueOf(scoreteliko));
                         break;
                     } else {
                         apantisi1.setBackgroundResource(R.drawable.text_cornerkokkino);   //setBackgroundColor(GameActivity.this.getResources().getColor(R.color.rigth_answer_green));
@@ -172,6 +181,7 @@ public class GameActivity extends Activity {
                     showAlertDialog();
                     return;
                 }
+
                 goToNextQuestion();
 
             }
@@ -187,6 +197,8 @@ public class GameActivity extends Activity {
                     if(answer.getIsValidAnswer()==1 && (apantisi2.getText().toString().equals(answer.getText()))){
                         apantisi2.setBackgroundResource(R.drawable.text_cornerprassino);
                         isCorrectAnswer = true;
+                        scoreteliko=scoreteliko+score;
+                        scoreview.setText(String.valueOf(scoreteliko));
                         break;
                     }
                     else {
@@ -204,6 +216,7 @@ public class GameActivity extends Activity {
                     showAlertDialog();
                     return;
                 }
+
                 goToNextQuestion();
             }
         });
@@ -218,6 +231,8 @@ public class GameActivity extends Activity {
                     if(answer.getIsValidAnswer()==1 && (apantisi3.getText().toString().equals(answer.getText()))){
                         apantisi3.setBackgroundResource(R.drawable.text_cornerprassino);
                         isCorrectAnswer = true;
+                        scoreteliko=scoreteliko+score;
+                        scoreview.setText(String.valueOf(scoreteliko));
                         break;
                     }
                     else {
@@ -234,6 +249,7 @@ public class GameActivity extends Activity {
                     showAlertDialog();
                     return;
                 }
+
                 goToNextQuestion();
             }
         });
@@ -248,6 +264,8 @@ public class GameActivity extends Activity {
                     if(answer.getIsValidAnswer()==1 && (apantisi4.getText().toString().equals(answer.getText()))){
                         apantisi4.setBackgroundResource(R.drawable.text_cornerprassino);
                         isCorrectAnswer = true;
+                        scoreteliko=scoreteliko+score;
+                        scoreview.setText(String.valueOf(scoreteliko));
                         break;
                     }
                     else {
@@ -264,6 +282,7 @@ public class GameActivity extends Activity {
                     showAlertDialog();
                     return;
                 }
+
                 goToNextQuestion();
             }
         });
@@ -372,7 +391,7 @@ public class GameActivity extends Activity {
                         apantisi2.setEnabled(true);
                         apantisi3.setEnabled(true);
                         apantisi4.setEnabled(true);
-                        progressStatus = 101;
+                        progressStatus = 81;
 
                     }
                 });
