@@ -305,7 +305,7 @@ title.setText(epelexes);
                 GameActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size() , lastQuestionNumber);
+                        randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size()-1 , lastQuestionNumber);
 
                         //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
                         lastQuestionNumber.add(randomNumer);
