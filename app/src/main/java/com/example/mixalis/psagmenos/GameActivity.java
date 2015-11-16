@@ -52,7 +52,7 @@ public class GameActivity extends Activity {
     public final static String GAMEACTIVITY = "gameactivity";
     public final static String HIGHSCORE = "highscore";
     TextView highScoreText;
-    boolean lockLoop = false;
+    boolean lockLoop = true;
 
 
     @Override
@@ -87,6 +87,7 @@ public class GameActivity extends Activity {
                 //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
                 lastQuestionNumber.add(randomNumer);
                 questions.get(randomNumer - 1);
+                lockLoop = false;
                 GameActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
