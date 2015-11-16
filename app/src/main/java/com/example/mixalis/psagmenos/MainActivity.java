@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
 import java.sql.SQLException;
 
 import Database.ExternalDbOpenHelper;
@@ -20,11 +22,10 @@ import Misc.Preferences;
 import static android.media.MediaPlayer.*;
 import static com.example.mixalis.psagmenos.R.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private TextView enarxi;
     public static MediaPlayer mediaPlayer;
     ProgressBar progressBarq;
-
 
 
 
