@@ -79,21 +79,31 @@ public class GameActivity extends Activity {
         highScoreText.setText(String.valueOf(highScore));
 
         dbHelper = new ExternalDbOpenHelper(this);
-        questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                questions= (ArrayList<Question>) dbHelper.getQuestionForCategory(epelexes);   //erwtiseis
+                randomNumer = getRandomNumer(questions.size()-1);
+                //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
+                lastQuestionNumber.add(randomNumer);
+                questions.get(randomNumer - 1);
+                GameActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        erwtisi.setText(questions.get(randomNumer - 1).getText());
+                        ArrayList<Answer> answers = (ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer - 1));//apantiseis
+                        answers.get(0);
+                        apantisi1.setText(answers.get(0).getText());
+                        apantisi2.setText(answers.get(1).getText());
+                        apantisi3.setText(answers.get(2).getText());
+                        apantisi4.setText(answers.get(3).getText());
+                    }
+                });
+
+
+            }
+        }).start();
         //pairnoume tuxaio arithmo gia erwtisi!
-        randomNumer = getRandomNumer(questions.size()-1);
-        //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
-        lastQuestionNumber.add(randomNumer);
-        questions.get(randomNumer-1);
-        erwtisi.setText(questions.get(randomNumer-1).getText());
-
-
-      ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer-1));//apantiseis
-        answers.get(0);
-        apantisi1.setText(answers.get(0).getText());
-        apantisi2.setText(answers.get(1).getText());
-        apantisi3.setText(answers.get(2).getText());
-        apantisi4.setText(answers.get(3).getText());
 
         // answers.get(0).getIsValidAnswer(); an einai swsti i pantisi einai 1 aliws einai 0!
 
