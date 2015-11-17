@@ -150,6 +150,8 @@ public class GameActivity extends Activity {
 
                                 }
                                 randomNumer = getRandomWithExclusion(new Random(), 0 , questions.size()-1 , lastQuestionNumber);
+                                if(randomNumer>=questions.size())
+                                    return;
 
                                 //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
                                 lastQuestionNumber.add(randomNumer);
