@@ -86,13 +86,13 @@ public class GameActivity extends Activity {
                 randomNumer = getRandomNumer(questions.size()-1);
                 //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
                 lastQuestionNumber.add(randomNumer);
-                questions.get(randomNumer - 1);
+                questions.get(randomNumer);
                 lockLoop = false;
                 GameActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        erwtisi.setText(questions.get(randomNumer - 1).getText());
-                        ArrayList<Answer> answers = (ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer - 1));//apantiseis
+                        erwtisi.setText(questions.get(randomNumer).getText());
+                        ArrayList<Answer> answers = (ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer));//apantiseis
                         answers.get(0);
                         apantisi1.setText(answers.get(0).getText());
                         apantisi2.setText(answers.get(1).getText());
@@ -189,7 +189,7 @@ public class GameActivity extends Activity {
                 lockLoop = true;
 
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer-1));
+                Question question = (questions.get(randomNumer));
                 ArrayList<Answer> answers = (ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer : answers) {
                     if (answer.getIsValidAnswer() == 1 && (apantisi1.getText().toString().equals(answer.getText()))) {
@@ -227,7 +227,7 @@ public class GameActivity extends Activity {
 
 
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer-1));
+                Question question = (questions.get(randomNumer));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer :answers){
                     if(answer.getIsValidAnswer()==1 && (apantisi2.getText().toString().equals(answer.getText()))){
@@ -267,7 +267,7 @@ public class GameActivity extends Activity {
 
 
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer-1));
+                Question question = (questions.get(randomNumer));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer :answers){
                     if(answer.getIsValidAnswer()==1 && (apantisi3.getText().toString().equals(answer.getText()))){
@@ -305,7 +305,7 @@ public class GameActivity extends Activity {
                 lockLoop = true;
 
                 boolean isCorrectAnswer = false;
-                Question question = (questions.get(randomNumer-1));
+                Question question = (questions.get(randomNumer));
                 ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(question);//apantiseis
                 for (Answer answer :answers){
                     if(answer.getIsValidAnswer()==1 && (apantisi4.getText().toString().equals(answer.getText()))){
@@ -427,12 +427,12 @@ public class GameActivity extends Activity {
                 GameActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size() , lastQuestionNumber);
+                        randomNumer = getRandomWithExclusion(new Random(), 1 , questions.size()-1 , lastQuestionNumber);
 
                         //kratame ton arithmo tis proigoumenis erwtisis gia na min ksanapesei!
                         lastQuestionNumber.add(randomNumer);
-                        erwtisi.setText(questions.get(randomNumer-1).getText());
-                        ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer-1));//apantiseis
+                        erwtisi.setText(questions.get(randomNumer).getText());
+                        ArrayList<Answer>answers=(ArrayList<Answer>) dbHelper.getPossibleAnswersForQuestion(questions.get(randomNumer));//apantiseis
                         answers.get(0);
                         apantisi1.setText(answers.get(0).getText());
                         apantisi2.setText(answers.get(1).getText());
