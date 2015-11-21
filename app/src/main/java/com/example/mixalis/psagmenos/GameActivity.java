@@ -461,6 +461,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onDestroy() {
         thread.interrupt();
+        progressStatus = 0;
         super.onDestroy();
     }
 }
